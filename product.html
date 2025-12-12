@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html"> My Store</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+
+        
+        <li class="nav-item">
+          <a class="nav-link" href="users.html">Users</a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+    <div class="container py-5">
+        <a href="index.html" class="btn btn-secondary  mb-3"><i class="bi bi-arrow-left-square-fill"></i> Back</a>
+        <div class="row">
+            <div id="productDetail" class="row"></div>
+
+
+
+        </div>
+    </div>
+    <script>
+        const urlparams = new URLSearchParams(window.location.search);
+        const productId = urlparams.get("id");
+
+        async function loadProduct() {
+            try {
+                const res = await fetch(`https://fakestoreapi.com/products/${productId}`)
+                const product = await res.json();
+
+                const container = document.getElementById("productDetail")
+
+                container.innerHTML = `
+                
+                <div class="col-md-5">
+            <img src="${product.image}" alt="" class="img-fluid rounded">
+        </div>
+        <div class="col-md-7">
+            <h2>${product.title}</h2>
+            <p class="text-muted">${product.description}</p>
+            <h3 class="text-success">$${product.price}</h3>
+            <button class="btn btn-success mt-3">Buy Now</button>
+            </div>
+                
+                `;
+
+            } catch (error) {
+                console.error("Error Loading Product :", error)
+            }
+        }
+        loadProduct();
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+        <footer class="bg-dark text-white text-center py-3 mt-4">
+    <p class="mb-0">© 2025 My Store — All Rights Reserved</p>
+    <small>Built with  by Krishi Upadhyay</small>
+</footer>
+
+
+</body>
+
+</html>
